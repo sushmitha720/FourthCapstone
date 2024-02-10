@@ -1,0 +1,115 @@
+<%- include('partials/header.ejs'); -%>
+<div class="container" id="search">
+    <h2>Create New Book Notes</h2>
+    <h5>Search term and click enter to display relevant books:</h5>
+    <div class="row">
+      <input type="text" placeholder="Search.." id="myInput" autofocus onkeyup="filterFunction()">
+      <div id="myDropdown" class="dropdown-content">
+        <ul id = "contents">
+          <li>
+            <div class="row no-gutters bg-light position-relative">
+              <div class="col-md-10 mb-md-0 p-md-2">
+                <a href="#" class="stretched-link" onclick="return addContainer(this)">Go somewhere</a>
+                <p></p>
+              </div>
+              <div class="col-md-2 position-static p-2 pl-md-0">
+                <img src="" alt="book cover">
+              </div>
+            </div>
+          </li>
+        <li>
+          <div class="row no-gutters bg-light position-relative">
+            <div class="col-md-10 mb-md-0 p-md-2">
+              <a href="#" class="stretched-link" onclick="return addContainer(this)">Go somewhere</a>
+              <p></p>
+            </div>
+            <div class="col-md-2 position-static p-2 pl-md-0">
+              <img src="" alt="book cover">
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row no-gutters bg-light position-relative">
+            <div class="col-md-10 mb-md-0 p-md-2">
+              <a href="#" class="stretched-link" onclick="return addContainer(this)">Go somewhere</a>
+              <p></p>
+            </div>
+            <div class="col-md-2 position-static p-2 pl-md-0">
+              <img src="" alt="book cover">
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row no-gutters bg-light position-relative">
+            <div class="col-md-10 mb-md-0 p-md-2">
+              <a href="#" class="stretched-link" onclick="return addContainer(this)">Go somewhere</a>
+              <p></p>
+            </div>
+            <div class="col-md-2 position-static p-2 pl-md-0">
+              <img src="" alt="book cover">
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row no-gutters bg-light position-relative">
+            <div class="col-md-10 mb-md-0 p-md-2">
+              <a href="#" class="stretched-link" onclick="return addContainer(this)">Go somewhere</a>
+              <p></p>
+            </div>
+            <div class="col-md-2 position-static p-2 pl-md-0">
+              <img src="" alt="book cover">
+            </div>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+      <div class="container" id="noteform">
+
+        <form id="form" action="javascript:void(0);">
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="form-group">
+                <!-- <label for="book_title">Book:</label> -->
+                <!-- <input name="book_title" type="text" class="form-control" id="book_title"> -->
+                <textarea name="book_title" type="text" readonly class="form-control-plaintext" id="book_title" row="1" value="">
+                  </textarea>
+              </div>
+              <div class="form-group">
+                <!-- <label for="book_author">By:</label> -->
+                <input name="book_authors" type="text" readonly class="form-control-plaintext" id="book_authors" value=""/>
+              </div>
+              <div class="form-group">
+              <label for="rateYo">Your Rating: </label>
+              <div id="rateYo"></div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <!-- <div class="col-md-2 position-static p-2 pl-md-0"> -->
+                <img id="book_image" src="" height="200" alt="book image">
+              <!-- </div> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="notes">Your Notes</label>
+            <textarea name="notes" class="form-control" id="notes"  oninput="auto_grow(this)"></textarea>
+          </div>
+          <!-- <input type="submit" class="contactbtn" value="POST" /> -->
+          <button class="contactbtn" onclick="createForm('createnote')">POST</button>
+        </form>
+      </div>
+
+<script>
+  document.getElementById("contents").style.display = "none";
+document.getElementById("noteform").style.display = "none";
+$(function () {
+  $("#rateYo").rateYo({
+    halfStar: true,
+    // onSet: function (rating, rateYoInstance) {
+    //   alert("Rating is set to: " + rating);
+    // },
+  });
+});
+</script>
+<%- include('partials/footer.ejs'); -%>

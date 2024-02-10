@@ -1,0 +1,63 @@
+<%- include('partials/header.ejs'); -%>
+      <div class="container" id="noteform1">
+        <form id="form" action="javascript:void(0);">
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="form-group">
+                <em><%= book['created_on'] %></em>
+
+                <!-- <label for="book_title">Book:</label> -->
+                <!-- <input name="book_title" type="text" class="form-control" id="book_title"> -->
+                <textarea name="book_title" type="text" readonly class="form-control-plaintext" id="book_title" row="1"><%= book.name %></textarea>
+                <!-- <input name="book_title" type="text" readonly class="form-control-plaintext" id="book_title" value="<%= book.name %>"/> -->
+
+              </div>
+              <div class="form-group">
+                <!-- <label for="book_author">By:</label> -->
+                <input name="book_authors" type="text" readonly class="form-control-plaintext" id="book_authors" value="<%= book.authors %>"/>
+              </div>
+              <a href="/view/<%= book['id'] %>" class="btn btn-primary" id="viewbtn">View</a>
+              <button class="btn btn-secondary" onclick="editForm()" id="editbtn">Edit</button>
+              <a href="/delete/<%= book['id'] %>" class="btn btn-danger" id="deletebtn">Delete</a>
+              <div class="form-group">
+              <label for="rateYo">Your Rating: </label>
+              <div id="rateYo"></div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <!-- <div class="col-md-2 position-static p-2 pl-md-0"> -->
+                <img id="book_image" src="<%= book.cover_i %>" height="200" alt="book image">
+              <!-- </div> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="notes">Your Notes</label>
+            <textarea name="notes" class="form-control" id="notes1"  oninput="auto_grow(this)" disabled>
+            <%= book.note  %></textarea>
+          </div>
+          <!-- <input type="submit" class="contactbtn" value="POST" /> -->
+          <button class="contactbtn" id="submitedit" onclick="createForm('editnote/'+book.id)">POST</button>
+        </form>
+      </div>
+
+
+ <script>
+  window.setTimeout( function() {
+    $("textarea#notes1").height( $("textarea#notes1")[0].scrollHeight );
+    document.getElementById("submitedit").style.display = "none";
+    document.getElementById("viewbtn").style.display = "none";
+
+}, 1);
+   const book = <%- JSON.stringify(book) %>;
+    $(function () {
+  
+  $("#rateYo").rateYo({
+    rating: book.rating,
+    readOnly: true,
+    //  starWidth: "20px"
+  });
+  });
+
+ </script>
+
+<%- include('partials/footer.ejs'); -%>

@@ -1,0 +1,107 @@
+<%- include('partials/header.ejs'); -%>
+
+  <div class="box" id="heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <h1>
+            My Book Notes List 
+          </h1>
+        </div>
+        <div class="col-sm-7">
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort By: <span id="sort"><%= sort %></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="/?by=Date&dir=ASC">Date</a>
+                <a class="dropdown-item" href="/?by=Name&dir=ASC">Name</a>
+                <a class="dropdown-item" href="/?by=Ratings&dir=ASC">Ratings</a>
+              </div>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+              <% if (direction === 'ASC') { %>
+                <a href="#"><button type="submit" class="btn btn-secondary active" disabled>
+              <% } else { %>
+              <a href="/?by=<%= sort %>&dir=ASC"><button type="submit" class="btn btn-secondary">
+              <% } %>
+                <img class="icon"
+              src="/assets/icons/sort-up.svg" alt="sort up">
+              </button></a>
+              <% if (direction === 'DESC') { %>
+                <a href="#"><button type="submit" class="btn btn-secondary active" disabled>
+              <% } else { %>
+              <a href="/?by=<%= sort %>&dir=DESC"><button type="submit" class="btn btn-secondary">
+              <% } %>
+                <img class="icon"
+              src="/assets/icons/sort-down.svg" alt="sort down">
+              </button></a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+   
+  <div class="box">
+    <% for(let book of books){%>
+      <div class="item">
+        <!-- <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="item.id">
+        </form> -->
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-9">
+                <em><%= book['created_on'] %></em>
+                <h5 class="card-title">
+                  <a href="/view/<%= book.id %>" class="stretched-link">
+                  <h3><%= book['name'] %></h3>
+                  </a>
+                  <h6><%= book['authors'] %></h6>
+                  <div id="rateYo" class="<%= book['id'] %>" style="padding: 0;"></div>
+                </h5>
+                <p class="card-text" >
+                  <%= book['note'] %>
+                </p>
+                
+              </div>
+              <div class="col-sm-3" style="margin-top: 20px;">
+                <img src="<%= book['cover_i'] %>" height="200" alt="book cover" 
+                 />
+              </div>
+            </div>            
+         
+          </div>
+          
+        </div>
+
+      </div>
+      <% } %>
+
+        <!-- <form class="item" action="/add" method="post">
+          <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
+          <button class="add" type="submit" name="list" value=listTitle >+</button>
+        </form> -->
+     </div>
+  <script>
+    const books = <%- JSON.stringify(books) %>;
+    // var books = JSON.parse(ejs);
+    // console.log(books);
+    // console.log(typeof(books))
+books.forEach(book => {
+  $(function () {
+ 
+  $("#rateYo."+book['id']).rateYo({
+    rating: book['rating'],
+    readOnly: true,
+    starWidth: "20px"
+  });
+});
+});
+  </script>
+   <!-- <script src="scripts/script.js"></script>   -->
+
+  <%- include('partials/footer.ejs'); -%>
